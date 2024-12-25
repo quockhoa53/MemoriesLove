@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'name' => 'dell/web_memories',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => null,
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        'dell/web_memories' => array(
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => null,
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'facebook/graph-sdk' => array(
+            'pretty_version' => '5.1.4',
+            'version' => '5.1.4.0',
+            'reference' => '38fd7187a6704d3ab14ded2f3a534ac4ee6f3481',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../facebook/graph-sdk',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'phpmailer/phpmailer' => array(
+            'pretty_version' => 'v6.9.1',
+            'version' => '6.9.1.0',
+            'reference' => '039de174cd9c17a8389754d3b877a2ed22743e18',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpmailer/phpmailer',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);

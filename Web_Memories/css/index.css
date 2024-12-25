@@ -1,0 +1,198 @@
+.container{
+    display: block;
+    text-align: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.groups-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Container styling */
+.group-fa {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Text styling */
+.group p {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form elements styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    background-color: #e44494;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #cc0a92;
+}
+
+/* Lịch */
+#calendar-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#showCalendarBtn{
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(31, 156, 234);
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+#showCalendarBtn:hover{
+    background-color: rgb(1, 134, 216);
+}
+
+.month {
+    width: calc(33.333% - 20px);
+    margin: 10px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+
+.month h2 {
+    text-align: center;
+}
+
+.month-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.month-table th, .month-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.month-table th {
+    background: #f4f4f4;
+}
+
+.month-table td {
+    background: #fff;
+}
+
+.today {
+    background-color: #ffeb3b;
+    font-weight: bold;
+    border-radius: 50%;
+    color: #e21111;
+}
+.year-selection {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.year-selection label {
+    margin-right: 10px;
+}
+
+.year-selection select {
+    padding: 5px;
+    font-size: 16px;
+}
+
+.anniversary {
+    color: rgb(199, 85, 138);
+    font-weight: bold;
+}
+
+/* Styles for tablets and mobile devices */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .month {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .btn-submit {
+        font-size: 14px;
+    }
+
+    #calendar-container {
+        flex-direction: column;
+    }
+}
+
+/* Styles for very small screens */
+@media (max-width: 576px) {
+    .btn-submit {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .month-table th, .month-table td {
+        padding: 4px;
+        font-size: 12px;
+    }
+
+    #showCalendarBtn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .vertical-menu {
+        display: none;
+    }
+}
+
+
+
+

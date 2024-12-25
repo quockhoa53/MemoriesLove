@@ -1,0 +1,153 @@
+.form-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.container .diary-form {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.diary-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="title"],
+textarea {
+    width: 90%;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+    resize: vertical;
+    height: 150px;
+}
+
+.group-button {
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    gap: 20px; /* Space between the buttons */
+}
+
+.group-button input[type="submit"],
+.group-button input[type="button"] {
+    padding: 15px 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.group-button input[type="submit"] {
+    background-color: #0975bd;
+    color: white;
+}
+
+.group-button input[type="button"] {
+    background-color: #f44336;
+    color: white;
+}
+
+.group-button input[type="submit"]:hover {
+    background-color: #082c87;
+}
+
+.group-button input[type="button"]:hover {
+    background-color: #e53935;
+}
+
+.group {
+    width: 600px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+.post {
+    width: 600px; /* Fixed width */
+    flex-shrink: 0; /* Prevent shrinking */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    flex-grow: 1;
+}
+
+.post-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.post-content {
+    font-size: 1em;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    white-space: pre-wrap;
+}
+
+.post-date {
+    color: #777;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+.post-image {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.post-image img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+    }
+    .post {
+        width: 100%;
+    }
+    .group {
+        width: 100%;
+    }
+}

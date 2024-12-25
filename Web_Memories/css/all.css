@@ -1,0 +1,331 @@
+body {
+    background-image: url('/web_memories/images/nenhong.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 20px;
+}
+
+.error {
+    color: red;
+    display: block;
+    text-align: center;
+}
+
+.navbar-nav li.active a {
+    color: #fff;
+}
+
+#head .container {
+    background-color: #f8dcf2;
+    padding: 20px 0;
+}
+
+.navbar {
+    width: 100%;
+    justify-content: center;
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.nav-item {
+    flex-basis: 15%;
+    text-align: center;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vertical-menu {
+    width: 200px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.vertical-menu a {
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.vertical-menu a:hover {
+    background-color: #ccc;
+    color: black;
+    text-decoration: none;
+}
+
+.menu-toggle {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.username {
+    margin-right: 20px;
+}
+
+.red-icon {
+    color: red !important;
+}
+
+.yellow-backgroud{
+    background-color: rgb(105, 105, 102);
+    color: white;
+}
+
+#profilePicPreview img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.profileName {
+    text-align: center;
+    margin-top: 10px; /* Adjust spacing as needed */
+}
+
+.profileName p {
+    margin: 0;
+    font-size: 16px; /* Adjust font size as needed */
+}
+
+.button-loc{
+    color: white;
+    background-color: #0975bd;
+}
+.button-loc:hover{
+    background-color: #082c87;
+}
+
+.groud-ngang {
+    display: flex;
+    align-items: center;
+}
+.groud-ngang img {
+    max-width: 25%;
+    margin-right: 50px;
+}
+.groud-ngang p {
+    margin: 0;
+}
+
+.ngang{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    gap: 8px;
+}
+
+.ngang-left{
+    display: flex;
+    margin: auto;
+    gap: 8px;
+}
+.space{
+    margin: 10px;
+}
+/* Lightbox CSS */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+}
+.lightbox .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2em;
+    color: white;
+    cursor: pointer;
+}
+
+.btn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #555;
+    transition: color 0.3s;
+}
+
+.edit-btn:hover {
+    color: #0975bd;
+}
+
+.delete-btn:hover {
+    color: #f44336;
+}
+
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.image-container {
+    position: relative;
+    width: calc(25% - 10px);
+    margin-bottom: 10px;
+}
+
+.preview-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    left: 80px;
+    background-color: rgba(255, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 1;
+}
+
+.close-button:hover {
+    background-color: rgba(255, 0, 0, 0.7);
+}
+
+#btn-pink{
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(233, 92, 193);
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+#btn-pink:hover{
+    background-color: rgb(240, 28, 180);
+}
+
+#btn-blue{
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    background-color:  rgb(31, 156, 234);
+    cursor: pointer;
+    transition: background-color 0.25s;
+    display: block;
+    margin: 0 auto;
+}
+#btn-blue:hover{
+    background-color: rgb(1, 134, 216);
+}
+
+#date, #start_date, #end_date, #months, #years{
+    padding: 5px 20px;
+    border-radius: 5px;
+}
+
+.custom-file-upload {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+#profilePic, #imgbir, #imglove {
+    display: none; /* Ẩn input mặc định */
+}
+
+#fileLabel, #fileLabelBir, #fileLabelLove {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #f2b573;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+
+#fileLabel:hover{
+    background-color: #ef9433;
+}
+
+#fileLabelBir:hover {
+    background-color: #ef9433;
+}
+
+#fileLabelLove:hover {
+    background-color: #ef9433;
+}
+
+
+.image-preview {
+    margin-top: 10px;
+    max-width: 300px;
+    max-height: 300px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    display: none;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.image-previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.img-container {
+    position: relative;
+    width: calc(25% - 10px);
+    margin-bottom: 10px;
+}
+
+.img-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+
+
+
+
