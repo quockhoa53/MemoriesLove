@@ -1,11 +1,3 @@
-/* Base Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .user-container {
     display: block;
     padding: 10px;
@@ -281,15 +273,18 @@ textarea {
     background-color: #fb3c46;
 }
 
-/* Congratulations Messages */
+/* Lời chúc */
 .loichuc {
     display: flex;
     align-items: flex-start;
+    margin: auto;
     padding: 15px;
     border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 15px;
     background-color: #fff;
     margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
 }
 
 .loichuc .avatar {
@@ -301,27 +296,143 @@ textarea {
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid #d355a1;
 }
 
 .loichuc .user-info {
     flex: 1;
 }
 
-.loichuc .user-info h4 {
-    margin: 0 0 5px 0;
-    font-size: 18px;
-    color: #333;
-}
-
 .loichuc .user-info p {
     margin: 0 0 10px 0;
-    font-size: 16px;
+    margin-top: 15px;
     color: #555;
+    line-height: 1.5;
 }
 
 .loichuc .user-info .image img {
-    max-width: 100%;
+    max-width: 50%;
     border-radius: 10px;
+    margin-top: 10px;
+}
+
+/* Thông báo kỷ niệm */
+.body-memories {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(90deg, #e16782,#ffe2e2, #ffe2e2, #e16782);
+    color: #f55050;
+    padding: 20px;
+    max-width: 80%;
+    border-radius: 10px;
+}
+.post-memories {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    width: 90%;
+}
+h2, h3 {
+    margin: 10px 0;
+    text-shadow: 0px 5px 10px rgba(255, 255, 255, 0.7);
+}
+.text-ngang {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#btn-blue {
+    background-color: #d355a1;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+#btn-blue:hover {
+    background-color: #e572b8;
+}
+.comment-memories {
+    width: 100%;
+    height: auto;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    margin-right: 10px;
+}
+.submit-btn {
+    background-color: #d355a1;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.submit-btn:hover {
+    background-color: #e572b8;
+}
+
+/* Các phần liên quan đến file upload */
+.custom-file-upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+}
+
+#fileLabelLove {
+    display: inline-block;
+    background: #f98cab;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#fileLabelLove:hover {
+    background: #fbb1c7;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+/* Hiển thị ảnh thumbnail trong bình luận */
+.image-preview {
+    margin-top: 15px;
+    margin: auto;
+    height: auto;
+    width: 300px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: none;
+}
+
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: auto;
 }
 
 /* Responsive Design */
@@ -388,3 +499,108 @@ textarea {
         padding-left: 15px;
     }
 }
+
+/* Chúc mừng sinh nhật */
+.birthday-card {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    /* text-align: center; */
+    color: white;
+    position: relative;
+    overflow: hidden;
+    animation: popUp 1s ease-in-out;
+    z-index: 1;
+}
+
+.birthday-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2), rgba(255,255,255,0));
+    animation: shine 5s infinite linear;
+    z-index: 0; /* Đảm bảo lớp phủ nằm dưới nội dung */
+    pointer-events: none; /* Lớp phủ không chặn tương tác */
+}
+
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #f55050;
+    text-shadow: 0px 5px 10px rgba(255, 255, 255, 0.7);
+}
+
+.message {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.age {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #ffefdb;
+    animation: bounce 1.5s infinite;
+}
+
+.cake-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.cake {
+    width: 120px;
+    animation: float 2s ease-in-out infinite;
+}
+
+/* Hiệu ứng pop-up cho toàn bộ thẻ */
+@keyframes popUp {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Hiệu ứng phát sáng cho nền */
+@keyframes shine {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Hiệu ứng bounce cho tuổi */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Hiệu ứng float cho hình ảnh bánh kem */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+

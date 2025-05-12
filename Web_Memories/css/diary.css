@@ -1,108 +1,169 @@
-.form-group {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 15px;
-}
-
 .container .diary-form {
-    max-width: 1000px;
-    margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
 }
 
-.diary-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 label {
-    font-weight: bold;
-    margin-bottom: 5px;
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+    display: block;
+    font-weight: 500;
 }
 
 input[type="title"],
-textarea {
-    width: 90%;
+textarea,
+input[type="file"] {
+    width: 100%;
     padding: 15px;
     font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 10px;
     background-color: #f9f9f9;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+}
+
+input[type="title"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #0975bd;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(9, 117, 189, 0.1);
 }
 
 textarea {
+    height: 200px;
     resize: vertical;
-    height: 150px;
 }
 
-.group-button {
+.custom-file-upload {
     display: flex;
-    justify-content: center; /* Center the buttons */
-    gap: 20px; /* Space between the buttons */
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
 }
 
-.group-button input[type="submit"],
-.group-button input[type="button"] {
-    padding: 15px 30px;
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload label {
+    background-color: #0975bd;
+    color: white;
+    padding: 10px 20px;
     font-size: 16px;
-    border: none;
-    border-radius: 5px;
+    font-weight: 500;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.group-button input[type="submit"] {
-    background-color: #0975bd;
-    color: white;
+.custom-file-upload label:hover {
+    background-color: #082c87;
 }
 
+.image-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px auto;
+    border: 1px dashed #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 150px;
+    background-color: #fafafa;
+    width: 100%;
+    max-width: 300px;
+}
+
+.preview-image {
+    display: block;
+    max-width: 100%;
+    border-radius: 10px;
+    margin: 0 auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    object-fit: contain;
+}
+
+
+.group-button {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.group-button input[type="submit"],
 .group-button input[type="button"] {
-    background-color: #f44336;
+    padding: 15px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.group-button input[type="submit"] {
+    background-color: #0078d4;
     color: white;
 }
 
 .group-button input[type="submit"]:hover {
-    background-color: #082c87;
+    background-color: #005bb5;
+}
+
+.group-button input[type="button"] {
+    background-color: #ff4757;
+    color: white;
 }
 
 .group-button input[type="button"]:hover {
-    background-color: #e53935;
-}
-
-.group {
-    width: 600px;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
+    background-color: #e63946;
 }
 
 .post {
-    width: 600px; /* Fixed width */
-    flex-shrink: 0; /* Prevent shrinking */
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    width: 100%;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    margin: 20px auto;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .post-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 15px;
 }
 
 .post-title {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    flex-grow: 1;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
 }
 
 .post-buttons {
@@ -111,16 +172,15 @@ textarea {
 }
 
 .post-content {
-    font-size: 1em;
-    line-height: 1.5;
-    margin-bottom: 15px;
-    white-space: pre-wrap;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 15px 0;
 }
 
 .post-date {
     color: #777;
-    font-size: 0.9em;
-    margin-bottom: 15px;
+    font-size: 0.9rem;
+    margin-top: 10px;
 }
 
 .post-image {
@@ -130,7 +190,10 @@ textarea {
 
 .post-image img {
     max-width: 100%;
-    border-radius: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    display: inline-block;
 }
 
 hr {
@@ -141,13 +204,13 @@ hr {
 }
 
 @media (max-width: 768px) {
-    .container {
-        width: 100%;
-    }
+    .container .diary-form,
     .post {
-        width: 100%;
+        padding: 20px;
     }
-    .group {
-        width: 100%;
+
+    .group-button {
+        flex-direction: column;
+        gap: 10px;
     }
 }

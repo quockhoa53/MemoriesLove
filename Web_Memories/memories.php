@@ -334,7 +334,7 @@
     ?>
 </header>
 <br>
-<main>
+<main class="main-content">
     <div class="container">
         <?php if ($query){ ?>
             <h2>Kết quả tìm kiếm cho <i>"<?php echo htmlspecialchars($query); ?>"</i></h2>
@@ -348,33 +348,33 @@
             if(!empty($datacustomer['ID_KH'])){
                 if(CheckTrangThaiHenHo($conn, $datacustomer['ID_KH']) == 1){
         ?>
-        <div class="ngang">
-            <b><h5>Kỉ niệm hôm nay ngày:</h5></b>
-            <span><b><h5><?php echo htmlspecialchars(date('d/m/Y')); ?></h5></b></span>
-        </div>
+        <p class="title-love1"><b>Hôm nay ngày <?php echo htmlspecialchars(date('d/m/Y')); ?>. Hãy cùng nhau lưu giữ những khoảnh khắc đẹp nhất của tình yêu 💖</b></p>
+        <br>
         <div class="group">
         <?php
             if($memo != null){
                 foreach($memo as $x){
                     if($x == "MemoriesLove"){
+                        echo '<div class="body-memories">';
                         echo '<form method="post" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" enctype="multipart/form-data">';
-                        echo '<div class="post"><div class="ngang"><h2><b>HAPPY ANNIVERSARY</b></div></h2>';
-                        echo '<div class="ngang"><b><h3>'.$tenban.' ❤ '.$tenny.'</h3></b></div>';
-                        echo '<div class="ngang"><p>Hai bạn đã bên nhau được <b>'.$timelove->y.'</b> năm, <b>'.$timelove->m.'</b> tháng, đã được <b>'.$timelove->days.'</b> ngày ❤</p></div>';
-                        echo '<div class="ngang"><input type="button" id="btn-blue" value="Xem ảnh kỉ niệm" onclick="showImages()"></div>';
+                        echo '<div class="post-memories"><h2 class="title"><b>HAPPY ANNIVERSARY</b></h2>';
+                        echo '<div class="text-ngang"><b><h3>'.$tenban.' ❤ '.$tenny.'</h3></b></div>';
+                        echo '<div class="text-ngang" style="color:black;"><p>Hai bạn đã bên nhau được <b>'.$timelove->y.'</b> năm, <b>'.$timelove->m.'</b> tháng, đã được <b>'.$timelove->days.'</b> ngày</p></div>';
+                        echo '<div class="text-ngang"><input type="button" id="btn-blue" value="Xem ảnh kỉ niệm" onclick="showImages()"></div>';
                         echo '<br>';
-                        echo '<div class="ngang">';
-                        echo '<textarea id="mess_love" name="mess_love" placeholder="Gửi lời yêu thương đến đối phương..."></textarea>';
+                        echo '<div class="text-ngang">';
+                        echo '<textarea class="comment-memories" id="mess_love" name="mess_love" placeholder="Gửi lời yêu thương đến đối phương..."></textarea>';
                         echo '<button type="submit" name="submit_love" class="submit-btn">
-                                    <i class="bi bi-chat-heart"></i>
+                                    <i class="bi bi-chat-heart" style="color:white;"></i>
                               </button>';
                         echo '</div>';
                         echo '<br>';
                         echo '<div class="custom-file-upload">';
-                        echo '<label for="imglove" id="fileLabelLove">Tải ảnh lên</label>';
+                        echo '<label for="imglove" id="fileLabelLove">📷 Tải ảnh lên</label>';
                         echo '<input type="file" id="imglove" name="imglove" accept="image/*" onchange="updateFileNameAndPreview(\'imglove\', \'fileLabelLove\', \'imagePreviewLove\')">';
                         echo '</div>';
                         echo '<div id="imagePreviewLove" class="image-preview"></div>'; 
+                        echo '</div>';
                         // Hiển thị lời chúc
                         echo '<hr>';
                         $loichuc = DanhSachLoiChuc($conn, 'MEMORIES');
@@ -383,10 +383,10 @@
                                 echo '<div class="loichuc">';
                                 echo '<div class="avatar"><img src="' . htmlspecialchars($lc['AVARTAR']) . '" alt="Avatar"></div>';
                                 echo '<div class="user-info">';
-                                echo '<h4>' . htmlspecialchars($lc['HOTEN']) . '</h4>';
+                                echo '<p><b>' . htmlspecialchars($lc['HOTEN']) . '</b></p>';
                                 echo '<p>' . htmlspecialchars($lc['NOIDUNG']) . '</p>';
                                 if (!empty($lc['ANH'])) {
-                                    echo '<div class="post-image ngang"><img src="' . htmlspecialchars($lc['ANH']) . '" alt="Image" class="w-25"></div>';
+                                    echo '<div class="post-image"><img src="' . htmlspecialchars($lc['ANH']) . '" alt="Image" class="w-25"></div>';
                                 }
                                 echo '</div>';
                                 echo '</div>';
@@ -397,27 +397,33 @@
                         echo '</form>';
                     }
                     if($x == "HappyBirthday"){
-                        echo '<div class="post"><div class="ngang"><h2><b>HAPPY BIRTHDAY</b></div></h2>';
-                        echo '<div class="ngang"><p> Chúc bạn sinh nhật vui vẻ!</p></div>';
-                        echo '<div class="ngang">Tuổi<b>'.($nam - $nambir).'</b>nhiều thành công hơn nhé!</div>';
-                        echo '<div class="ngang"><img src="/web_memories/images/banhkem.gif" class="w-25"></div>';
+                        echo '<div class="birthday-card">';
+                        echo '<h2 class="title"><b>HAPPY BIRTHDAY 🎉</b></h2>';
+                        echo '<p class="message">Chúc bạn sinh nhật vui vẻ!</p>';
+                        echo '<p class="age">Tuổi <b>' . ($nam - $nambir) . '</b> nhiều thành công hơn nhé!</p>';
+                        echo '<div class="cake-container">';
+                        echo '<img src="/web_memories/images/banhkem.gif" alt="Bánh kem" class="cake">';
+                        echo '</div>';
                         echo '</div>';
                     }
                     if($x == "HappyBirthdayLove"){
-                        echo '<form method="post" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" enctype="multipart/form-data">';
-                        echo '<div class="post"><div class="ngang"><h2><b>HAPPY BIRTHDAY YOUR LOVE</b></div></h2>';
-                        echo '<div class="ngang">Hôm nay là sinh nhật<b>'.($nam - $nambirlove).'</b> tuổi của người yêu bạn</div>';
-                        echo '<div class="ngang">Gửi lời chúc và dành những điều tốt đẹp cho bạn ấy nhé ❤</div>';
-                        echo '<div class="ngang"><img src="/web_memories/images/banhkem.gif" class="w-25"></div>';
+                        echo '<div class="birthday-card">';
+                        echo '<form method="post" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" enctype="multipart/form-data" class="birthday-love-form">';
+                        echo '<h2 class="title"><b>HAPPY BIRTHDAY YOUR LOVE 🎂</b></h2>';
+                        echo '<p class="message">Hôm nay là sinh nhật <b>' . ($nam - $nambirlove) . '</b> tuổi của người yêu bạn</p>';
+                        echo '<p class="message">Gửi lời chúc và dành những điều tốt đẹp cho bạn ấy nhé ❤</p>';
+                        echo '<div class="cake-container">';
+                        echo '<img src="/web_memories/images/banhkem.gif" alt="Bánh kem" class="cake">';
+                        echo '</div>';
                         echo '<div class="ngang">';
-                        echo '<textarea id="mess_bir" name="mess_bir" placeholder="Gửi lời yêu thương đến đối phương..."></textarea>';
-                        echo '<button type="submit" name="submit_bir" class="submit-btn">
-                                    <i class="bi bi-chat-heart"></i>
+                        echo '<textarea class="comment-memories" id="mess_bir" name="mess_bir" placeholder="Gửi lời yêu thương đến đối phương..."></textarea>';
+                        echo '<button type="submit" name="submit_bir" class="submit-btn" style="margin-top:10px;">
+                                    <i class="bi bi-chat-heart" style="color:white;"></i>
                               </button>';
                         echo '</div>';
                         echo '<br>';
                         echo '<div class="custom-file-upload">';
-                        echo '<label for="imgbir" id="fileLabelBir">Tải ảnh lên</label>';
+                        echo '<label for="imgbir" id="fileLabelBir">📷 Tải ảnh lên</label>';
                         echo '<input type="file" id="imgbir" name="imgbir" accept="image/*" onchange="updateFileNameAndPreview(\'imgbir\', \'fileLabelBir\', \'imagePreviewBir\')">';
                         echo '</div>';
                         echo '<div id="imagePreviewBir" class="image-preview"></div>';                         
@@ -429,18 +435,18 @@
                                 echo '<div class="loichuc">';
                                 echo '<div class="avatar"><img src="' . htmlspecialchars($lc['AVARTAR']) . '" alt="Avatar"></div>';
                                 echo '<div class="user-info">';
-                                echo '<h4>' . htmlspecialchars($lc['HOTEN']) . '</h4>';
+                                echo '<p><b>' . htmlspecialchars($lc['HOTEN']) . '</b></p>';
                                 echo '<p>' . htmlspecialchars($lc['NOIDUNG']) . '</p>';
                                 if (!empty($lc['ANH'])) {
-                                    echo '<div class="post-image ngang"><img src="' . htmlspecialchars($lc['ANH']) . '" alt="Image" class="w-25"></div>';
+                                    echo '<div class="post-image"><img src="' . htmlspecialchars($lc['ANH']) . '" alt="Image" class="w-25"></div>';
                                 }
                                 echo '</div>';
                                 echo '</div>';
                                 echo '<hr>';
                             }
                         }
-                        echo '</div>';
                         echo '</form>';
+                        echo '</div>';
                         echo '<hr>';
                     }
                 }
@@ -474,13 +480,14 @@
         });
     </script>
         </div>
+        <br>
         <div class="group">
             <span><input type="button" id="btn-pink" value="Thêm kỉ niệm mới" onclick="showwritememoriesForm()"></span>
         </div>
         <hr>
         <form method="GET" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <div class="ngang">
-                <div>
+                <div style="padding:10px 0px;">
                     <label for="months">Chọn tháng:</label>
                     <select id="months" name="month">
                         <?php for ($i = 1; $i <= 12; $i++): ?>
@@ -490,7 +497,7 @@
                         <?php endfor; ?>
                     </select>
                 </div>
-                <div>
+                <div style="padding:10px 0px;">
                     <label for="years">Chọn năm:</label>
                     <select id="years" name="year">
                         <?php 
@@ -502,7 +509,7 @@
                         <?php endfor; ?>
                     </select>
                 </div>
-                <div>
+                <div style="padding:10px 20px; margin-top: -5px;">
                     <input type="submit" id="btn-blue" value="Xem kỉ niệm">
                 </div>
             </div>
@@ -517,7 +524,7 @@
                     $_SESSION['thang'] = $thangFind;
                     $_SESSION['nam'] = $namFind;
                     // Hiển thị tiêu đề
-                    echo '<b><h4 class="text-info">Kỉ niệm tháng ' . htmlspecialchars($thangFind) . '</h4></b>';
+                    echo '<b><h4 style="color: #e91e63; font-weight: bold;">Kỉ niệm tháng ' . htmlspecialchars($thangFind) . '</h4></b>';
                     echo '<hr>';
 
                     // Kiểm tra dữ liệu kỷ niệm
@@ -599,7 +606,7 @@
                                 <textarea id="comment" name="comment" placeholder="Viết bình luận..."></textarea>
                                 <input type="hidden" name="id_kn" value="<?php echo htmlspecialchars($memory['ID_KN']); ?>">
                                 <button type="submit" name="submit" class="submit-btn">
-                                    <i class="bi bi-chat-heart"></i>
+                                    <i class="bi bi-chat-heart" style="color:white;"></i>
                                 </button>
                             </div>
                         </form>
@@ -711,7 +718,12 @@
                         echo "<div class='ngang'><p>Bạn và người ấy chưa cập nhật kỉ niệm nào!</p></div>";
                     }
                     } else {
-                        echo '<div class="post ngang">Bạn hãy tìm đối tượng hẹn hò để sử dụng tính năng này nhé!</div>';
+                        echo '<div class="title-nolove">Xin lỗi tạm thời bạn chưa thể sử dụng chức năng này. Hãy set hẹn hò với người yêu của bạn và quay lại trải nghiệm nhé!</div>';
+                        echo '<div class="col-12 d-flex justify-content-center align-items-center">';
+                        echo '<a href="index.php">';
+                        echo '<input type="button" id="btn-pink" value="Bắt đầu ngay">';
+                        echo '</a>';
+                        echo '</div>';
                     }
                 ?>
             </div>
@@ -723,7 +735,12 @@
         <?php
         } //đóng if 1
         else{
-            echo '<div class="post ngang">Bạn hãy tìm đối tượng hẹn hò để sử dụng tính năng này nhé!</div>';
+            echo '<div class="title-nolove">Xin lỗi tạm thời bạn chưa thể sử dụng chức năng này. Hãy set hẹn hò với người yêu của bạn và quay lại trải nghiệm nhé!</div>';
+                                    echo '<div class="col-12 d-flex justify-content-center align-items-center">';
+                        echo '<a href="index.php">';
+                        echo '<input type="button" id="btn-pink" value="Bắt đầu ngay">';
+                        echo '</a>';
+                        echo '</div>';
         }
         ?>
         <?php } ?>

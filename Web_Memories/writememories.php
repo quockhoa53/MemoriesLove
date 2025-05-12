@@ -243,7 +243,7 @@ if(isset($_SESSION['thang']) && isset($_SESSION['nam'])){
         <input type="hidden" name="id_kn" value="<?php echo htmlspecialchars($memoriesId); ?>">
         <input type="hidden" id="delete_image_ids" name="delete_image_ids" value="">
         <div class="ngang">
-            <label for="date">Kỉ niệm ngày:</label>
+            <label for="date"><b>Kỉ niệm ngày:</b></label>
             <input type="date" id="date" name="date" class="date" value="<?php echo isset($memoriesData['NGAYKINIEM']) ? htmlspecialchars($memoriesData['NGAYKINIEM']) : htmlspecialchars($date); ?>">
         </div>
         <div class="form-group">

@@ -19,7 +19,7 @@
         }
     </script>
 </head>
-<body>
+<body class="body-login">
     <?php
         $mess = "";
         $rancode = null;
@@ -34,7 +34,7 @@
                     $mess = "Username đã được sử dụng!";
                 } else {
                     try {
-                        $mail->addAddress($email, $username);
+                        $mail->addAddress('nguyenquockhoa5549@gmail.com', $username);
                         $rancode = mt_rand(100000, 999999);
                         $mail->isHTML(true);
                         $mail->CharSet = 'UTF-8';

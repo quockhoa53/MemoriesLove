@@ -119,29 +119,36 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 </header>
 <main>
     <div class="container">
-        <form class="diary-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
+        <form class="diary-form" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
             <input type="hidden" name="id_nk" value="<?php echo htmlspecialchars($diaryId); ?>">
+            
             <div class="form-group">
                 <label for="title">Tiêu đề:</label>
-                <input type="title" id="title" name="title" value="<?php echo isset($diaryData['TIEUDE']) ? htmlspecialchars($diaryData['TIEUDE']) : ''; ?>" required>
+                <input type="title" id="title" name="title" value="<?php echo isset($diaryData['TIEUDE']) ? htmlspecialchars($diaryData['TIEUDE']) : ''; ?>" placeholder="Nhập tiêu đề..." required>
             </div>
+            
             <div class="form-group">
                 <label for="content">Nội dung:</label>
-                <textarea id="content" name="content" placeholder="Bạn đang nghĩ gì?..." required><?php echo isset($diaryData['NOIDUNG']) ? htmlspecialchars($diaryData['NOIDUNG']) : ''; ?></textarea>
+                <textarea id="content" name="content" placeholder="Viết điều bạn đang nghĩ..."><?php echo isset($diaryData['NOIDUNG']) ? htmlspecialchars($diaryData['NOIDUNG']) : ''; ?></textarea>
             </div>
+            
             <div class="form-group">
                 <label for="profilePic">Ảnh nhật ký:</label>
-                <div id="imagePreview" class="image-preview"></div>
+                <div id="imagePreview" class="image-preview">
+                    <?php if (!empty($diaryData['ANH_NK'])): ?>
+                        <img src="<?php echo htmlspecialchars($diaryData['ANH_NK']); ?>" alt="Ảnh nhật ký hiện tại" class="preview-image">
+                    <?php else: ?>
+                        <p>Hình ảnh sẽ được hiển thị tại đây.</p>
+                    <?php endif; ?>
+                </div>
                 <div class="custom-file-upload">
-                    <label for="profilePic" id="fileLabel">Tải ảnh lên</label>
+                    <label for="profilePic" id="fileLabel">📷 Tải ảnh lên</label>
                     <input type="file" id="profilePic" name="profilePic" accept="image/*" onchange="updateFileNameAndPreview()">
                 </div>
             </div>
-            <div class="form-group">
-                <?php if (!empty($diaryData['ANH_NK'])): ?>
-                    <img src="<?php echo htmlspecialchars($diaryData['ANH_NK']); ?>" alt="Ảnh nhật ký hiện tại" class="preview-image w-25">
-                <?php endif; ?>
-            </div>
+            
+            <hr>
+            
             <div class="group-button">
                 <input type="submit" name="submit" value="Hoàn thành">
                 <input type="button" value="Thoát" onclick="showDiaryForm()">

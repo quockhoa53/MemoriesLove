@@ -1,40 +1,58 @@
 .game-container{
-    background-color: white;
-    border-radius: 10px;
-    width: auto;
-    height: auto;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: linear-gradient(145deg, #fff0f6, #ffe6f0);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+.title-game{
+    color: #e91e63;
+}
+
 .text{
     display: block;
     padding: 2%;
 }
 
+form.question-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+
 button {
     padding: 10px 20px;
-    margin: 10px;
     font-size: 16px;
-    border-radius: 5px;
+    border-radius: 20px;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .question-btn {
-    background-color: #4CAF50;
+    padding: 10px 20px;
+    border-radius: 20px;
     color: white;
+    background-color: #008CBA !important;
 }
 
 .question-btn:hover {
-    background-color: #45a049;
+    background-color: #007bb5 !important;
+    
 }
 
 .start-btn {
-    background-color: #008CBA !important;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: rgb(233, 92, 193);
     color: white;
 }
 
 .start-btn:hover {
-    background-color: #007bb5 !important;
+    background-color: rgb(240, 28, 180);
 }
 
 /* CSS cho form nhập số câu hỏi */
@@ -58,7 +76,7 @@ button {
     border: 1px solid #ddd;
 }
 
-#questionForm .btn {
+/* #questionForm .btn {
     margin-top: 10px;
     background-color: #007bff;
     border-color: #007bff;
@@ -68,47 +86,11 @@ button {
 #questionForm .btn:hover {
     background-color: #0056b3;
     border-color: #004085;
+} */
+
+.btn-secondary, .btn-primary, .btn-danger{
+    border-radius: 20px;
 }
-
-/* Thêm câu hỏi */
-
-label {
-    font-weight: bold;
-    margin-top: 10px;
-    display: block;
-    margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.question-container {
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
-    width: auto;
-    height: auto;
-}
-
-.question-container:last-child {
-    border-bottom: none;
-}
-
-.add-option-button {
-    background-color: #2196F3;
-    margin-top: 5px;
-}
-
-.add-option-button:hover {
-    background-color: #1976D2;
-}
-
 
 .group-container {
     background-color: white;
@@ -128,18 +110,32 @@ input[type="number"] {
 }
 
 .form-toggle button {
-    background-color: #333;
+    background-color: #cf7898;
     color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
     flex: 1;
     text-align: center;
+    transition: all 0.3s ease;
 }
 
 .form-toggle button:not(:last-child) {
     margin-right: 10px;
 }
+
+/* Hiệu ứng active: làm cho nút đậm hơn khi được chọn */
+.form-toggle .active {
+    background-color: #d81b60; /* Màu đậm hơn khi nút được chọn */
+    font-weight: bold;
+}
+
+/* Khi hover */
+.form-toggle button:hover {
+    background-color: #d81b60;
+    transition: background-color 0.3s ease;
+}
+
 
 .form-container {
     position: relative;
@@ -166,7 +162,7 @@ input {
 }
 
 .header {
-    background-color: #4caf50;
+    background-color: #e82ea1;
     border-radius: 10px 10px 0 0;
     color: white;
     padding: 10px;
@@ -176,11 +172,15 @@ input {
     margin: 15px 0;
     display: flex;
     align-items: center;
-    border: 2px solid #4caf50;
+    border: 2px solid #db0b7a;
     border-radius: 25px;
     padding: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+
+.option:hover{
+    background-color: #f9cae8;
 }
 
 .delete-btn {
@@ -190,6 +190,10 @@ input {
     font-size: 1.2em;
     color: #555;
     transition: color 0.3s;
+}
+
+.action{
+    margin-left: 30px;
 }
 
 .leaderboard {
@@ -212,7 +216,7 @@ table {
 }
 
 table, th, td {
-    border: 1px solid #ddd;
+    border: 1px solid #dddddd;
 }
 
 th, td {
@@ -221,7 +225,7 @@ th, td {
 }
 
 th {
-    background-color: #4CAF50;
+    background-color: #d81b60;
     color: white;
 }
 
@@ -230,7 +234,7 @@ tr:nth-child(even) {
 }
 
 tr:hover {
-    background-color: #ddd;
+    background-color: #f9cae8;
 }
 
 @media screen and (max-width: 768px) {

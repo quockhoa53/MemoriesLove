@@ -684,3 +684,36 @@ function XuLyDuLieuTimKiem($conn, $dataSearch){
     ];
 }
 
+function DanhSachHanhTrinhYeu($conn, $value) {
+    $sql = "SELECT * FROM HANHTRINHYEU HTY 
+            JOIN CHITIETHANHTRINHYEU CTHTY ON HTY.ID = CTHTY.ID_HTY 
+            WHERE ID_KH = ? 
+            ORDER BY NGAY ASC";
+            
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $value);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $journeyInfo = [];
+
+    if ($result === false) {
+        return [];
+    }
+
+    while ($row = $result->fetch_assoc()) {
+        $journeyInfo[] = [
+            'ID' => $row['ID'],
+            'TIEUDE' => $row['TIEUDE'],
+            'NOIDUNG' => $row['NOIDUNG'],
+            'NGAY' => $row['NGAY'],
+            'ANH' => $row['ANH'],
+            'NGUOIVIET' => $row['NGUOIVIET'],
+            'THOIGIANCAPNHAT' => $row['THOIGIANCAPNHAT'],
+            'ID_KH' => $row['ID_KH']
+        ];
+    }
+
+    $stmt->close();
+
+    return $journeyInfo;
+}

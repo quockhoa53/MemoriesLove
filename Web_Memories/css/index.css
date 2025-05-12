@@ -24,7 +24,6 @@
 
 /* Text styling */
 .group p {
-    font-family: 'Arial', sans-serif;
     font-size: 16px;
     color: #333;
     margin-bottom: 20px;
@@ -32,19 +31,22 @@
 
 /* Form elements styling */
 .form-group {
+    display: flex;
+    align-items: center;
     margin-bottom: 15px;
 }
 
 .form-group label {
-    display: block;
+    width: 100px;
+    text-align: left;
     font-family: 'Arial', sans-serif;
     font-size: 14px;
     color: #555;
-    margin-bottom: 5px;
+    margin-right: 10px;
 }
 
 .form-group input {
-    width: calc(100% - 20px);
+    flex: 1;
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ccc;
@@ -77,8 +79,9 @@
 
 #showCalendarBtn{
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 20px;
     color: white;
+    border: none;
     background-color: rgb(31, 156, 234);
     cursor: pointer;
     transition: background-color 0.25s;
@@ -145,6 +148,15 @@
 .anniversary {
     color: rgb(199, 85, 138);
     font-weight: bold;
+}
+
+.text-date {
+    color: #e91e63;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
 }
 
 /* Styles for tablets and mobile devices */

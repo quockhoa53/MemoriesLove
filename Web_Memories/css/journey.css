@@ -1,0 +1,235 @@
+/* Body */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff7f0;
+  color: #444;
+  overflow-x: hidden;
+}
+
+.head-journey {
+  text-align: center;
+  background: linear-gradient(45deg, #ff7b89, #ffb199, #ffd3b6);
+  background-size: 300% 300%;
+  padding: 30px 15px;
+  color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: gradientMove 6s infinite ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hiệu ứng chữ lung linh */
+.head-journey h1 {
+  font-size: 2.8rem;
+  margin: 0;
+  font-weight: bold;
+  background: linear-gradient(90deg, #f7c7c7, #dd506f, #ebbefd, #f0adad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGradient 3s infinite linear;
+}
+
+.head-journey p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  animation: fadeIn 3s ease-in-out;
+}
+
+/* Hiệu ứng động gradient */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hiệu ứng chữ chuyển màu */
+@keyframes textGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hiệu ứng fade-in cho đoạn mô tả */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hiệu ứng lấp lánh (sparkle) */
+.head-journey::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: 150px;
+  opacity: 0.5;
+  animation: sparkleMove 10s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes sparkleMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 200px 200px; }
+}
+
+/* Timeline Container */
+.timeline {
+position: relative;
+max-width: 500px;
+margin: 50px auto;
+padding: 20px 0;
+display: flex;
+flex-direction: column;
+gap: 40px;
+}
+
+/* Creating the central line for the timeline */
+.timeline::before {
+content: '';
+position: absolute;
+left: 50%;
+top: 0;
+height: 100%;
+width: 2px;
+background-color: #ddd;
+transform: translateX(-50%);
+}
+
+/* Hiệu ứng động xuất hiện */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Thêm animation cho timeline items */
+.timeline-item {
+  display: flex;
+  gap: 20px;
+  position: relative;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0; /* Ẩn mục trước khi cuộn vào khung nhìn */
+  transform: translateY(20px); /* Di chuyển xuống một chút để tạo hiệu ứng mượt */
+  animation-duration: 1s;
+  animation-fill-mode: forwards; /* Đảm bảo mục giữ nguyên trạng thái sau animation */
+}
+
+.timeline-item:nth-child(odd) {
+left: -60%;  /* Nằm bên trái đường kẻ */
+flex-direction: row;  /* Hình ảnh nằm bên trái */
+animation-name: slideInLeft;
+}
+
+.timeline-item:nth-child(even) {
+right: -60%;  /* Nằm bên phải đường kẻ */
+flex-direction: row-reverse;  /* Hình ảnh nằm bên phải */
+animation-name: slideInRight;
+}
+
+.timeline-item.is-visible {
+  opacity: 1;
+  transform: translateY(0); /* Reset vị trí */
+  animation-name: fadeInUp;
+}
+
+.timeline-item img {
+width: 150px;
+height: 150px;
+border-radius: 50%;
+object-fit: cover;
+flex-shrink: 0;
+}
+
+.timeline-content {
+flex: 1;
+}
+
+.timeline-content h3 {
+margin: 0 0 10px;
+color: #ff6b6b;
+}
+
+.timeline-content p {
+margin: 0;
+line-height: 1.6;
+}
+
+/* Counter Section */
+.counter {
+  text-align: center;
+  margin: 50px auto;
+}
+
+.counter h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.counter p {
+  font-size: 1.5rem;
+}
+
+/* Gallery */
+.gallery {
+  max-width: 900px;
+  margin: 50px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: white;
+  color: #444;
+  margin-top: 50px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+  margin: 0;
+}

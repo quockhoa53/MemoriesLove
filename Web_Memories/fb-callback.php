@@ -44,7 +44,7 @@ try {
   $_SESSION['user_name'] = $user['name'];
   $_SESSION['user_picture'] = $user['picture']['url'];
 
-  header("Location: test.php"); // Chuyển hướng đến trang success.php sau khi lấy thông tin người dùng
+  header("Location: index.php"); // Chuyển hướng đến trang success.php sau khi lấy thông tin người dùng
   exit;
 
 } catch(\Facebook\Exceptions\FacebookResponseException $e) {

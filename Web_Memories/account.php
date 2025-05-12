@@ -7,7 +7,7 @@ $username = 'Khách';
 $id_tk = null;
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
-    exit(); 
+    exit();
 }
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
@@ -28,6 +28,7 @@ if ($id_tk) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,273 +81,279 @@ if ($id_tk) {
         });
     </script>
     <?php
-        $currentPage = basename($_SERVER['PHP_SELF']);
+    $currentPage = basename($_SERVER['PHP_SELF']);
     ?>
     <?php
-        $name = $phone = $dob = $gender = $address = $ava = "";
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $maKH = generateUniqueCodes();
-            if (isset($_POST['changePassword'])) {
-                $currentPassword = filter_input(INPUT_POST, "currentPassword", FILTER_SANITIZE_SPECIAL_CHARS);
-                $newPassword = filter_input(INPUT_POST, "newPassword", FILTER_SANITIZE_SPECIAL_CHARS);
-                $confirmPassword = filter_input(INPUT_POST, "confirmPassword", FILTER_SANITIZE_SPECIAL_CHARS);
+    $name = $phone = $dob = $gender = $address = $ava = "";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $maKH = generateUniqueCodes();
+        if (isset($_POST['changePassword'])) {
+            $currentPassword = filter_input(INPUT_POST, "currentPassword", FILTER_SANITIZE_SPECIAL_CHARS);
+            $newPassword = filter_input(INPUT_POST, "newPassword", FILTER_SANITIZE_SPECIAL_CHARS);
+            $confirmPassword = filter_input(INPUT_POST, "confirmPassword", FILTER_SANITIZE_SPECIAL_CHARS);
 
-                $sql = "SELECT PASSWORD FROM TAIKHOAN WHERE ID_TK = ?";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("i", $id_tk);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $user = $result->fetch_assoc();
-                $hashedPassword = $user['PASSWORD'];
-                $stmt->close();
+            $sql = "SELECT PASSWORD FROM TAIKHOAN WHERE ID_TK = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $id_tk);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $user = $result->fetch_assoc();
+            $hashedPassword = $user['PASSWORD'];
+            $stmt->close();
 
-                if (password_verify($currentPassword, $hashedPassword)) {
-                    if ($newPassword === $confirmPassword) {
-                        $newHashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-                        $sql = "UPDATE TAIKHOAN SET PASSWORD = ? WHERE ID_TK = ?";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->bind_param("si", $newHashedPassword, $id_tk);
-                        if ($stmt->execute()) {
-                            echo "Mật khẩu đã được cập nhật thành công.";
-                        } else {
-                            echo "Có lỗi xảy ra. Vui lòng thử lại.";
-                        }
-                        $stmt->close();
+            if (password_verify($currentPassword, $hashedPassword)) {
+                if ($newPassword === $confirmPassword) {
+                    $newHashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                    $sql = "UPDATE TAIKHOAN SET PASSWORD = ? WHERE ID_TK = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("si", $newHashedPassword, $id_tk);
+                    if ($stmt->execute()) {
+                        echo "Mật khẩu đã được cập nhật thành công.";
                     } else {
-                        echo "Mật khẩu mới và xác nhận mật khẩu không khớp.";
+                        echo "Có lỗi xảy ra. Vui lòng thử lại.";
                     }
+                    $stmt->close();
                 } else {
-                    echo "Mật khẩu hiện tại không chính xác.";
+                    echo "Mật khẩu mới và xác nhận mật khẩu không khớp.";
                 }
-            } 
+            } else {
+                echo "Mật khẩu hiện tại không chính xác.";
+            }
+        } elseif (isset($_POST['action']) && $_POST['action'] === 'update') {
+            $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_SPECIAL_CHARS);
+            $gender = filter_input(INPUT_POST, "gender", FILTER_SANITIZE_SPECIAL_CHARS);
+            $dob = filter_input(INPUT_POST, "dob", FILTER_SANITIZE_SPECIAL_CHARS);
+            $address = filter_input(INPUT_POST, "address", FILTER_SANITIZE_SPECIAL_CHARS);
+            $phone = filter_input(INPUT_POST, "phone", FILTER_SANITIZE_SPECIAL_CHARS);
 
-            elseif(isset($_POST['action']) && $_POST['action'] === 'update'){
-                $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_SPECIAL_CHARS);
-                $gender = filter_input(INPUT_POST, "gender", FILTER_SANITIZE_SPECIAL_CHARS);
-                $dob = filter_input(INPUT_POST, "dob", FILTER_SANITIZE_SPECIAL_CHARS); 
-                $address = filter_input(INPUT_POST, "address", FILTER_SANITIZE_SPECIAL_CHARS);
-                $phone = filter_input(INPUT_POST, "phone", FILTER_SANITIZE_SPECIAL_CHARS);
-                
-                if (isset($_FILES['profilePic']) && $_FILES['profilePic']['error'] == 0) {
-                    $uploadDir = 'upload/';
-                    if (!is_dir($uploadDir)) {
-                        mkdir($uploadDir, 0777, true);
-                    }
-                    $uploadFile = $uploadDir . basename($_FILES['profilePic']['name']);
+            if (isset($_FILES['profilePic']) && $_FILES['profilePic']['error'] == 0) {
+                $uploadDir = 'upload/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                $uploadFile = $uploadDir . basename($_FILES['profilePic']['name']);
 
-                    if (move_uploaded_file($_FILES['profilePic']['tmp_name'], $uploadFile)) {
-                        $ava = $uploadFile;
-                    } else {
-                        echo "Không thể tải lên ảnh.";
-                    }
+                if (move_uploaded_file($_FILES['profilePic']['tmp_name'], $uploadFile)) {
+                    $ava = $uploadFile;
+                } else {
+                    echo "Không thể tải lên ảnh.";
                 }
-                if($ava == null){
-                    $ava = $datacustomer['AVARTAR'];
-                }
-                $sql = "INSERT INTO KHACHHANG (HOTEN, SDT, NGAYSINH, GIOITINH, DIACHI, ID_TK, AVARTAR, MAKH) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            }
+            if ($ava == null) {
+                $ava = $datacustomer['AVARTAR'];
+            }
+            $sql = "INSERT INTO KHACHHANG (HOTEN, SDT, NGAYSINH, GIOITINH, DIACHI, ID_TK, MAKH) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?)
                         ON DUPLICATE KEY UPDATE HOTEN=?, SDT=?, NGAYSINH=?, GIOITINH=?, DIACHI=?, AVARTAR=?";
-                $stmt = $conn->prepare($sql);
+            $stmt = $conn->prepare($sql);
 
-                if ($stmt) {
-                    $stmt->bind_param("ssssssssssssss", $name, $phone, $dob, $gender, $address, $id_tk, $ava, $maKH, $name, $phone, $dob, $gender, $address, $ava);
-                    $stmt->execute();
-                    $stmt->close();
-                }
+            if ($stmt) {
+                $stmt->bind_param("sssssssssssss", $name, $phone, $dob, $gender, $address, $id_tk, $maKH, $name, $phone, $dob, $gender, $address, $ava);
+                $stmt->execute();
+                $stmt->close();
             }
-
-            elseif(isset($_POST['henho_id'])){
-                $sql = "CALL SP_HUYHENHO(?, ?)";
-                $stmt = $conn->prepare($sql);
-                if($stmt){
-                    $stmt->bind_param('ii', $datacustomer['ID_KH'], $datayourlove['ID_KH']);
-                    $stmt->execute();
-                    $stmt->close();
-                }
+        } elseif (isset($_POST['henho_id'])) {
+            $sql = "CALL SP_HUYHENHO(?, ?)";
+            $stmt = $conn->prepare($sql);
+            if ($stmt) {
+                $stmt->bind_param('ii', $datacustomer['ID_KH'], $datayourlove['ID_KH']);
+                $stmt->execute();
+                $stmt->close();
             }
-            
         }
-        $datacustomer = [];
-        if ($id_tk) {
-            $datacustomer = ThongTinKhachHang($conn, $id_tk);
-        }
-        $datayourlove = [];
-        if ($id_tk) {
-            $datayourlove = TimNguoiHenHo($conn, $email);
-        }
-        ?>
-        <?php
-            $dataSearch = [];
-            $query = '';
-            if (isset($_GET['query'])) {
-                $query = $_GET['query'];
-                $dataSearch = NoiDungTimKiem($conn, $query, $datacustomer['ID_KH']);
-            }
-        ?>
+    }
+    $datacustomer = [];
+    if ($id_tk) {
+        $datacustomer = ThongTinKhachHang($conn, $id_tk);
+    }
+    $datayourlove = [];
+    if ($id_tk) {
+        $datayourlove = TimNguoiHenHo($conn, $email);
+    }
+    ?>
+    <?php
+    $dataSearch = [];
+    $query = '';
+    if (isset($_GET['query'])) {
+        $query = $_GET['query'];
+        $dataSearch = NoiDungTimKiem($conn, $query, $datacustomer['ID_KH']);
+    }
+    ?>
 </head>
+
 <body>
     <header>
         <?php
-            include("include/header.php");
+        include("include/header.php");
         ?>
     </header>
-    <br>
-    <div class="container">
-    <?php if ($query){ ?>
-            <h2 style="color: black;">Kết quả tìm kiếm cho <i>"<?php echo htmlspecialchars($query); ?>"</i></h2>
-            <div id="result" class="search-container">
-                <?php
+    <main class="main-content">
+        <div class="container">
+            <?php if ($query) { ?>
+                <h2 style="color: black;">Kết quả tìm kiếm cho <i>"<?php echo htmlspecialchars($query); ?>"</i></h2>
+                <div id="result" class="search-container">
+                    <?php
                     include("include/search.php");
-                ?>
-        </div>
-        <?php } else{ ?>
-    <div class="container-account">
-        <nav class="sidebar">
-            <ul>
-                <li><a href="#" class="nav-link" data-target="personalInfo">Thông tin cá nhân</a></li>
-                <li><a href="#" class="nav-link" data-target="changePassword">Đổi mật khẩu</a></li>
-                <li><a href="logout.php" class="nav-link">Đăng xuất</a></li>
-            </ul>
-        </nav>
-        <main>
-            <div id="personalInfo" class="content-section">
-                <h2>Thông tin cá nhân</h2>
-                <form id="accountForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
-                    <input type="hidden" name="action" value="update">
-                    <div class="form-group">
-                        <div id="profilePicContainer">
-                            <div id="profilePicPreview">
-                                <?php if (!empty($datacustomer['AVARTAR'])): ?>
-                                    <img src="<?php echo htmlspecialchars($datacustomer['AVARTAR']); ?>" alt="Ảnh đại diện" id="avatarImage">
-                                <?php else: ?>
-                                    <img src="default-avatar.png" alt="Ảnh đại diện" id="avatarImage">
-                                <?php endif; ?>
-                            </div>
-                            <input type="file" id="profilePic" name="profilePic" accept="image/*">
-                            <label for="profilePic" class="upload-icon">
-                                <b><i class="bi bi-upload"></i></b>
-                            </label>
-                        </div>
-                    </div>
-                    <!-- JavaScript để xử lý ảnh upload -->
-                    <script>
-                        document.getElementById('profilePic').addEventListener('change', function(event) {
-                            var file = event.target.files[0];
-                            if (file) {
-                                var reader = new FileReader();
-                                reader.onload = function(e) {
-                                    document.getElementById('avatarImage').src = e.target.result;
-                                }
-                                reader.readAsDataURL(file);
-                            }
-                        });
-                    </script>
-                    <div class="form-group">
-                        <?php
-                            if(!empty($datayourlove['HOTEN'])){
-                                echo '<p>❤ Đang hẹn hò với <span><b>'.htmlspecialchars($datayourlove['HOTEN']).'</b></span></p>';
-                                echo '<input type="hidden" name="henho_id" value="'.htmlspecialchars($datacustomer['ID_HH']).'">';
-                                echo '<button type="button" class="huy-henho" data-id="'.htmlspecialchars($datacustomer['ID_HH']).'" data-toggle="modal" data-target="#confirmDeleteModal">
+                    ?>
+                </div>
+            <?php } else { ?>
+                <div class="container-account">
+                    <nav class="sidebar">
+                        <ul>
+                            <li><a href="#" class="nav-link active" data-target="personalInfo"><b>Thông tin cá nhân</b></a></li>
+                            <li><a href="#" class="nav-link" data-target="changePassword"><b>Đổi mật khẩu</b></a></li>
+                            <li><a href="logout.php" class="nav-link"><b>Đăng xuất</b></a></li>
+                        </ul>
+                    </nav>
+                    <main>
+                        <div id="personalInfo" class="content-section">
+                            <h2>Thông tin cá nhân</h2>
+                            <form id="accountForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+                                <input type="hidden" name="action" value="update">
+                                <div class="form-group">
+                                    <div id="profilePicContainer">
+                                        <div id="profilePicPreview">
+                                            <?php if (!empty($datacustomer['AVARTAR'])): ?>
+                                                <img src="<?php echo htmlspecialchars($datacustomer['AVARTAR']); ?>" alt="Ảnh đại diện" id="avatarImage">
+                                            <?php else: ?>
+                                                <img src="/web_memories/images/avt.png" alt="avt" id="avatarImage">
+                                            <?php endif; ?>
+                                        </div>
+                                        <input type="file" id="profilePic" name="profilePic" accept="image/*">
+                                        <label for="profilePic" class="upload-icon">
+                                            <b><i class="bi bi-upload"></i></b>
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- JavaScript để xử lý ảnh upload -->
+                                <script>
+                                    document.getElementById('profilePic').addEventListener('change', function(event) {
+                                        var file = event.target.files[0];
+                                        if (file) {
+                                            var reader = new FileReader();
+                                            reader.onload = function(e) {
+                                                document.getElementById('avatarImage').src = e.target.result;
+                                            }
+                                            reader.readAsDataURL(file);
+                                        }
+                                    });
+                                </script>
+                                <div class="form-group">
+                                    <?php
+                                    if (!empty($datayourlove['HOTEN'])) {
+                                        echo '<p>❤ Đang hẹn hò với <span><b>' . htmlspecialchars($datayourlove['HOTEN']) . '</b></span></p>';
+                                        echo '<input type="hidden" name="henho_id" value="' . htmlspecialchars($datacustomer['ID_HH']) . '">';
+                                        echo '<button type="button" class="huy-henho" data-id="' . htmlspecialchars($datacustomer['ID_HH']) . '" data-toggle="modal" data-target="#confirmDeleteModal">
                                       Hủy hẹn hò</button>';
-                            }
-                        ?>
-                    </div>
-                    <div class="form-group">
-                        <?php
-                            if(!empty($datacustomer['ID_KH'])){
-                                echo '<label for="id">ID cá nhân </label>';
-                                echo '<input type="text" id="id" name="id" value="'.htmlspecialchars($datacustomer['MAKH']).'" readonly required>';
-                            }
-                        ?>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Họ và tên *</label>
-                        <input type="text" id="name" name="name" value="<?php echo !empty($datacustomer['HOTEN']) ? htmlspecialchars($datacustomer['HOTEN']) : ''; ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="gender">Giới tính</label>
-                        <input type="radio" id="female" name="gender" value="Nữ" <?php echo (!empty($datacustomer['GIOITINH']) && $datacustomer['GIOITINH'] === 'Nữ') ? 'checked' : ''; ?>> Nữ
-                        <input type="radio" id="male" name="gender" value="Nam" <?php echo (!empty($datacustomer['GIOITINH']) && $datacustomer['GIOITINH'] === 'Nam') ? 'checked' : ''; ?>> Nam
-                    </div>
-                    <div class="form-group">
-                        <label for="dob">Ngày sinh *</label>
-                        <input type="date" id="dob" name="dob" value="<?php echo !empty($datacustomer['NGAYSINH']) ? htmlspecialchars($datacustomer['NGAYSINH']) : ''; ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Địa chỉ *</label>
-                        <input type="text" id="address" name="address" value="<?php echo !empty($datacustomer['DIACHI']) ? htmlspecialchars($datacustomer['DIACHI']) : ''; ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">SĐT *</label>
-                        <input type="tel" id="phone" name="phone" value="<?php echo !empty($datacustomer['SDT']) ? htmlspecialchars($datacustomer['SDT']) : ''; ?>" required>
-                    </div>
-                    <button type="submit" id ="submit" name="submit">Xác nhận</button>
-                </form>
-            </div>
+                                    }
+                                    ?>
+                                </div>
+                                <div class="form-group">
+                                    <?php
+                                    if (!empty($datacustomer['ID_KH'])) {
+                                        echo '<label for="id"><b>ID cá nhân</b></label><br>';
+                                        echo '<input type="text" id="id" name="id" value="' . htmlspecialchars($datacustomer['MAKH']) . '" readonly required>';
+                                    }
+                                    ?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name"><b>Họ và tên</b></label><br>
+                                    <input type="text" id="name" name="name" value="<?php echo !empty($datacustomer['HOTEN']) ? htmlspecialchars($datacustomer['HOTEN']) : ''; ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender"><b>Giới tính</b></label>
+                                    <input type="radio" id="female" name="gender" value="Nữ" <?php echo (!empty($datacustomer['GIOITINH']) && $datacustomer['GIOITINH'] === 'Nữ') ? 'checked' : ''; ?>> Nữ
+                                    <input type="radio" id="male" name="gender" value="Nam" <?php echo (!empty($datacustomer['GIOITINH']) && $datacustomer['GIOITINH'] === 'Nam') ? 'checked' : ''; ?>> Nam
+                                </div>
+                                <div class="form-group">
+                                    <label for="dob"><b>Ngày sinh</b></label><br>
+                                    <input type="date" id="dob" name="dob" value="<?php echo !empty($datacustomer['NGAYSINH']) ? htmlspecialchars($datacustomer['NGAYSINH']) : ''; ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address"><b>Địa chỉ</b></label><br>
+                                    <input type="text" id="address" name="address" value="<?php echo !empty($datacustomer['DIACHI']) ? htmlspecialchars($datacustomer['DIACHI']) : ''; ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone"><b>SĐT</b></label><br>
+                                    <input type="tel" id="phone" name="phone" value="<?php echo !empty($datacustomer['SDT']) ? htmlspecialchars($datacustomer['SDT']) : ''; ?>" required>
+                                </div>
+                                <br>
+                                <hr>
+                                <div>
+                                    <button type="submit" id="submit" name="submit">Xác nhận</button>
+                                </div>
+                            </form>
+                        </div>
 
-            <div id="changePassword" class="content-section">
-                <h2>Đổi mật khẩu</h2>
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                    <div class="form-group">
-                        <label for="currentPassword">Mật khẩu hiện tại *</label>
-                        <input type="password" id="currentPassword" name="currentPassword" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="newPassword">Mật khẩu mới *</label>
-                        <input type="password" id="newPassword" name="newPassword" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmPassword">Xác nhận mật khẩu mới *</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" required>
-                    </div>
-                    <button type="submit" name="changePassword">Đổi mật khẩu</button>
-                </form>
-            </div>
-        </main>
-        <?php } ?>
-    </div>
-    </div>
-    <!-- Modal xác nhận xóa -->
-    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmDeleteModalLabel">Xác nhận chia tay?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                        <div id="changePassword" class="content-section">
+                            <h2>Đổi mật khẩu</h2>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="mt-5">
+                                        <div class="form-group">
+                                            <label for="currentPassword"><b>Mật khẩu hiện tại</b></label>
+                                            <input type="password" id="currentPassword" name="currentPassword" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="newPassword"><b>Mật khẩu mới</b></label>
+                                            <input type="password" id="newPassword" name="newPassword" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="confirmPassword"><b>Xác nhận mật khẩu mới</b></label>
+                                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required>
+                                        </div>
+                                        <button type="submit" name="changePassword" class="btn-block">Đổi mật khẩu</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                <?php } ?>
                 </div>
-                <div class="modal-body">
-                    Lưu ý sau khi chia tay mọi kỉ niệm cùng nhau của 2 bạn sẽ bị mất. Bạn vẫn chắc chắn muốn chia tay chứ?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn-secondary" data-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn-primary" id="confirmDeleteButton">OK</button>
+        </div>
+        <!-- Modal xác nhận xóa -->
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">Xác nhận chia tay?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Hãy chắc chắn với quyết định của bạn vì khi hủy hẹn hò thì mọi kỷ niệm của 2 bạn đều bị mất hết. Bạn vẫn muốn hủy chứ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary" data-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn-primary" id="confirmDeleteButton">OK</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-        $(document).ready(function() {
-            var henhoToDelete;
+        <script>
+            $(document).ready(function() {
+                var henhoToDelete;
 
-            $('.huy-henho').click(function() {
-                henhoToDelete = $(this).data('id');
-            });
+                $('.huy-henho').click(function() {
+                    henhoToDelete = $(this).data('id');
+                });
 
-            $('#confirmDeleteButton').click(function() {
-                if (henhoToDelete) {
-                    $('<form>', {
-                        'method': 'POST',
-                        'action': '<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>'
-                    }).append($('<input>', {
-                        'type': 'hidden',
-                        'name': 'henho_id',
-                        'value': henhoToDelete
-                    })).appendTo('body').submit();
-                }
+                $('#confirmDeleteButton').click(function() {
+                    if (henhoToDelete) {
+                        $('<form>', {
+                            'method': 'POST',
+                            'action': '<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>'
+                        }).append($('<input>', {
+                            'type': 'hidden',
+                            'name': 'henho_id',
+                            'value': henhoToDelete
+                        })).appendTo('body').submit();
+                    }
+                });
             });
-        });
-    </script>
+        </script>
+    </main>
 </body>
+
 </html>

@@ -17,11 +17,11 @@
             window.location.href = 'register.php';
         }
         function LoginFacebook() {
-            window.location.href = 'index.php';
+            window.location.href = 'fb-login.php';
         }
     </script>
 </head>
-<body>
+<body class="body-login">
     <?php
         $mess = "";
         if ($_SERVER["REQUEST_METHOD"] == "POST") {

@@ -1,9 +1,9 @@
+html {
+    overflow-y: scroll;
+}
+
 body {
-    background-image: url('/web_memories/images/nenhong.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    padding: 20px;
+    background: linear-gradient(135deg, #FADADD, #FFF5E1);
 }
 
 .error {
@@ -12,29 +12,129 @@ body {
     text-align: center;
 }
 
-.navbar-nav li.active a {
-    color: #fff;
+header {
+    padding: 10px 0;
+    background-color: #f8e1e7;
+    border-bottom: 2px solid #f8dcf2;
 }
 
-#head .container {
-    background-color: #f8dcf2;
-    padding: 20px 0;
+.left{
+    margin-left: auto !important;
+}
+
+.title-love{
+    font-size: 1.5em;
+    text-align: center;
+    color: #e91e63; 
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.title-love1{
+    font-size: 1.2em;
+    text-align: center;
+    color: #e91e63; 
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.title-nolove{
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #ffeef7;
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .navbar {
-    width: 100%;
-    justify-content: center;
+    background-color: #ffe6e6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    padding: 15px 0;
 }
 
 .navbar-nav {
-    display: flex;
     justify-content: center;
-    width: 100%;
 }
 
-.nav-item {
-    flex-basis: 15%;
-    text-align: center;
+.navbar-nav .nav-item {
+    margin: 0 30px;
+}
+
+.nav-link {
+    color: #d32f2f;
+    font-size: 16px;
+    font-weight: 600;
+    transition: color 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase;
+}
+
+.nav-link:hover, .nav-item.active .nav-link {
+    color: #e91e63;
+    transform: scale(1.1);
+}
+
+.navbar-toggler {
+    border-color: #e91e63;
+}
+
+.navbar-toggler-icon {
+    background-color: #d32f2f;
+}
+.search-bar {
+    transition: width 0.4s ease-in-out;
+    width: 100px;
+    height: 36px;
+    font-size: 14px;
+}
+
+/* .search-bar:focus {
+    width: 100%;
+} */
+
+.user-icon {
+    margin-right: 5px;
+    transition: transform 0.3s ease;
+    font-size: 25px;
+}
+
+.user-icon:hover {
+    transform: scale(1.2);
+}
+
+.rotating-icon {
+    animation: rotate 2s infinite linear;
+    color: #ff5733;
+    transition: all 0.3s ease;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.username {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.username:hover {
+    color: #ff5733;
+}
+
+hr {
+    margin: 0;
+    border-top: 1px solid #ddd;
+}
+
+form input[type="text"] {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    width: 90%;
 }
 
 .group {
@@ -74,7 +174,8 @@ body {
 }
 
 .username {
-    margin-right: 20px;
+    font-size: 14px; /* Giảm kích thước font chữ tên người dùng */
+    margin-right: 10px;
 }
 
 .red-icon {
@@ -227,7 +328,8 @@ body {
 
 #btn-pink{
     padding: 10px 20px;
-    border-radius: 5px;
+    border: none;
+    border-radius: 20px;
     color: white;
     background-color: rgb(233, 92, 193);
     cursor: pointer;
@@ -239,16 +341,21 @@ body {
 
 #btn-blue{
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 20px;
+    border: none;
     color: white;
-    background-color:  rgb(31, 156, 234);
+    background-color:  rgb(31, 156, 234) !important;
     cursor: pointer;
     transition: background-color 0.25s;
     display: block;
     margin: 0 auto;
 }
 #btn-blue:hover{
-    background-color: rgb(1, 134, 216);
+    background-color: rgb(1, 134, 216) !important;
+}
+
+#date{
+    margin-top: -5px;
 }
 
 #date, #start_date, #end_date, #months, #years{
@@ -323,6 +430,56 @@ body {
     height: auto;
     display: block;
 }
+
+.highlight-text {
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ffe6e6;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.toggle-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #e986a7; /* Màu sắc nổi bật */
+    color: white;
+    border: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 24px; /* Kích thước biểu tượng */
+    transition: all 0.3s ease;
+    margin: 20px auto; /* Căn giữa với margin */
+}
+
+.toggle-btn:hover {
+    background-color: #f26599; /* Màu đậm hơn khi hover */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); /* Hiệu ứng nổi hơn */
+    transform: scale(1.1); /* Hiệu ứng phóng to nhẹ khi hover */
+}
+
+.toggle-btn:focus {
+    outline: none;
+}
+
+/* trái tim rơi */
+@keyframes heartFall {
+    0% { transform: translateY(-100px) scale(1); opacity: 1; }
+    100% { transform: translateY(500px) scale(0.5); opacity: 0; }
+  }
+  
+  .heart {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    font-size: 1.5rem;
+    color: rgba(255, 100, 150, 0.8);
+    animation: heartFall 4s infinite ease-in;
+  }
 
 
 
